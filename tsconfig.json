@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"rootDir": ".",
+		"outDir": "dist",
+		"module": "esnext",
+		"target": "esnext",
+		"lib": ["esnext", "dom"],
+		"sourceMap": true,
+		"strict": true,
+		"verbatimModuleSyntax": true,
+		"isolatedModules": true,
+		"moduleDetection": "force",
+		"moduleResolution": "bundler",
+		"skipLibCheck": true
+	},
+	"include": ["src", "unit", "tests"]
+}

@@ -1,0 +1,332 @@
+{
+	"backends": {
+		"ibm": {
+			"name": "IBM GenericBackendV2",
+			"native_gates": ["rz", "sx", "x"],
+			"virtual_gates": ["rz"]
+		},
+		"alice_bob": {
+			"name": "Alice & Bob EMU:6Q:PHYSICAL_CATS",
+			"native_gates": ["rz", "x", "z"],
+			"virtual_gates": ["rz"],
+			"params": {
+				"average_nb_photons": 16,
+				"kappa_1": 100,
+				"kappa_2": 10000000,
+				"kappa_2_over_kappa_1": 100000
+			}
+		}
+	},
+	"gates": {
+		"H": {
+			"bloch_rotations": [
+				{
+					"axis": "Z",
+					"angle_rad": 3.14159265
+				},
+				{
+					"axis": "Y",
+					"angle_rad": 1.57079633
+				}
+			],
+			"hardware": {
+				"ibm": [
+					{
+						"gate": "rz",
+						"virtual": true,
+						"angle_rad": 1.57079633
+					},
+					{
+						"gate": "sx",
+						"virtual": false
+					},
+					{
+						"gate": "rz",
+						"virtual": true,
+						"angle_rad": 1.57079633
+					}
+				],
+				"alice_bob": null
+			}
+		},
+		"X": {
+			"bloch_rotations": [
+				{
+					"axis": "Z",
+					"angle_rad": 3.14159265
+				},
+				{
+					"axis": "Y",
+					"angle_rad": 3.14159265
+				}
+			],
+			"hardware": {
+				"ibm": [
+					{
+						"gate": "x",
+						"virtual": false
+					}
+				],
+				"alice_bob": [
+					{
+						"gate": "x",
+						"virtual": false
+					}
+				]
+			}
+		},
+		"Y": {
+			"bloch_rotations": [
+				{
+					"axis": "Z",
+					"angle_rad": 1.57079633
+				},
+				{
+					"axis": "Y",
+					"angle_rad": 3.14159265
+				},
+				{
+					"axis": "Z",
+					"angle_rad": 1.57079633
+				}
+			],
+			"hardware": {
+				"ibm": [
+					{
+						"gate": "rz",
+						"virtual": true,
+						"angle_rad": 3.14159265
+					},
+					{
+						"gate": "x",
+						"virtual": false
+					}
+				],
+				"alice_bob": [
+					{
+						"gate": "z",
+						"virtual": false
+					},
+					{
+						"gate": "x",
+						"virtual": false
+					}
+				]
+			}
+		},
+		"Z": {
+			"bloch_rotations": [
+				{
+					"axis": "Z",
+					"angle_rad": 3.14159265
+				}
+			],
+			"hardware": {
+				"ibm": [
+					{
+						"gate": "rz",
+						"virtual": true,
+						"angle_rad": 3.14159265
+					}
+				],
+				"alice_bob": [
+					{
+						"gate": "z",
+						"virtual": false
+					}
+				]
+			}
+		},
+		"S": {
+			"bloch_rotations": [
+				{
+					"axis": "Z",
+					"angle_rad": 1.57079633
+				}
+			],
+			"hardware": {
+				"ibm": [
+					{
+						"gate": "rz",
+						"virtual": true,
+						"angle_rad": 1.57079633
+					}
+				],
+				"alice_bob": [
+					{
+						"gate": "rz",
+						"virtual": true,
+						"angle_rad": 1.57079633
+					}
+				]
+			}
+		},
+		"S†": {
+			"bloch_rotations": [
+				{
+					"axis": "Z",
+					"angle_rad": -1.57079633
+				}
+			],
+			"hardware": {
+				"ibm": [
+					{
+						"gate": "rz",
+						"virtual": true,
+						"angle_rad": -1.57079633
+					}
+				],
+				"alice_bob": [
+					{
+						"gate": "rz",
+						"virtual": true,
+						"angle_rad": -1.57079633
+					}
+				]
+			}
+		},
+		"T": {
+			"bloch_rotations": [
+				{
+					"axis": "Z",
+					"angle_rad": 0.78539816
+				}
+			],
+			"hardware": {
+				"ibm": [
+					{
+						"gate": "rz",
+						"virtual": true,
+						"angle_rad": 0.78539816
+					}
+				],
+				"alice_bob": [
+					{
+						"gate": "rz",
+						"virtual": true,
+						"angle_rad": 0.78539816
+					}
+				]
+			}
+		},
+		"T†": {
+			"bloch_rotations": [
+				{
+					"axis": "Z",
+					"angle_rad": -0.78539816
+				}
+			],
+			"hardware": {
+				"ibm": [
+					{
+						"gate": "rz",
+						"virtual": true,
+						"angle_rad": -0.78539816
+					}
+				],
+				"alice_bob": [
+					{
+						"gate": "rz",
+						"virtual": true,
+						"angle_rad": -0.78539816
+					}
+				]
+			}
+		},
+		"SX": {
+			"bloch_rotations": [
+				{
+					"axis": "Z",
+					"angle_rad": -1.57079633
+				},
+				{
+					"axis": "Z",
+					"angle_rad": 3.14159265
+				},
+				{
+					"axis": "Y",
+					"angle_rad": 1.57079633
+				},
+				{
+					"axis": "Z",
+					"angle_rad": -1.57079633
+				}
+			],
+			"hardware": {
+				"ibm": [
+					{
+						"gate": "sx",
+						"virtual": false
+					}
+				],
+				"alice_bob": null
+			}
+		},
+		"SX†": {
+			"bloch_rotations": [
+				{
+					"axis": "Z",
+					"angle_rad": 1.57079633
+				},
+				{
+					"axis": "Z",
+					"angle_rad": 3.14159265
+				},
+				{
+					"axis": "Y",
+					"angle_rad": 1.57079633
+				},
+				{
+					"axis": "Z",
+					"angle_rad": 1.57079633
+				}
+			],
+			"hardware": {
+				"ibm": [
+					{
+						"gate": "rz",
+						"virtual": true,
+						"angle_rad": 1.57079633
+					},
+					{
+						"gate": "rz",
+						"virtual": true,
+						"angle_rad": 1.57079633
+					},
+					{
+						"gate": "sx",
+						"virtual": false
+					},
+					{
+						"gate": "rz",
+						"virtual": true,
+						"angle_rad": 1.57079633
+					},
+					{
+						"gate": "rz",
+						"virtual": true,
+						"angle_rad": 1.57079633
+					}
+				],
+				"alice_bob": null
+			}
+		},
+		"I": {
+			"bloch_rotations": [],
+			"hardware": {
+				"ibm": [
+					{
+						"gate": "rz",
+						"virtual": true
+					}
+				],
+				"alice_bob": [
+					{
+						"gate": "rz",
+						"virtual": true
+					}
+				]
+			}
+		}
+	}
+}
