@@ -1,8 +1,8 @@
 import { add, type Complex, c, mul } from "./complex.js";
 import type { StateVector } from "./statevector.js";
 
-type GateRow = [Complex, Complex];
-type GateMatrix = [GateRow, GateRow];
+export type GateRow = [Complex, Complex];
+export type GateMatrix = [GateRow, GateRow];
 
 const S2 = 1 / Math.sqrt(2);
 const C4 = Math.cos(Math.PI / 4);

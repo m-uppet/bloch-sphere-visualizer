@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("gate buttons update bloch-output", async ({ page }) => {
-	await page.goto("/");
+	await page.goto("/bloch.html");
 
 	// Snap to |+⟩, apply H — just verifies the UI→math wiring works end-to-end
 	await page.getByTestId("snap-plus").click();

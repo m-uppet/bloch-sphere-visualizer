@@ -20,7 +20,12 @@
 	},
 	"overrides": [
 		{
-			"includes": ["unit/**"],
+			"includes": [
+				"unit/**",
+				"src/circuit/renderer.ts",
+				"src/circuit/histogram.ts",
+				"src/circuit/main.ts"
+			],
 			"linter": {
 				"rules": {
 					"style": {

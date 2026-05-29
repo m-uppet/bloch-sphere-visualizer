@@ -5,7 +5,6 @@ export interface HardwareStep {
 }
 
 export interface GateDecomposition {
-	bloch_rotations: unknown[];
 	hardware: {
 		ibm: HardwareStep[] | null;
 		alice_bob: HardwareStep[] | null;
@@ -14,8 +13,6 @@ export interface GateDecomposition {
 
 export interface BackendInfo {
 	name: string;
-	native_gates: string[];
-	virtual_gates: string[];
 }
 
 export interface DecompositionFile {

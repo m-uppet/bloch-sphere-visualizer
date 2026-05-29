@@ -6,11 +6,52 @@
 
 body {
 	display: flex;
+	flex-direction: column;
 	height: 100vh;
 	overflow: hidden;
 	background: #0d1117;
 	color: #e6edf3;
 	font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Page navigation */
+#page-nav {
+	display: flex;
+	gap: 2px;
+	padding: 6px 12px;
+	background: #161b22;
+	border-bottom: 1px solid #30363d;
+	flex-shrink: 0;
+}
+
+#page-nav a {
+	color: #7d8590;
+	text-decoration: none;
+	font-size: 12px;
+	padding: 4px 12px;
+	border-radius: 4px;
+	transition:
+		background 0.12s,
+		color 0.12s;
+}
+
+#page-nav a:hover {
+	color: #e6edf3;
+	background: #21262d;
+}
+
+#page-nav a.active {
+	color: #e6edf3;
+	background: #21262d;
+	pointer-events: none;
+	cursor: default;
+}
+
+/* Main layout wrapper (Bloch sphere page) */
+#app {
+	display: flex;
+	flex: 1 1 0;
+	min-height: 0;
 }
 
 #canvas-container {
@@ -25,6 +66,7 @@ body {
 	width: 100%;
 	height: 100%;
 	display: block;
+	background: #0d1117;
 }
 
 #label-layer {
@@ -210,4 +252,260 @@ section h2 {
 	font-size: 13px;
 	color: #bb86fc;
 	line-height: 1.6;
+}
+
+/* ── Circuit debugger — Composer-style ── */
+#circuit-app {
+	flex: 1 1 0;
+	min-height: 0;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+#circuit-main-row {
+	flex: 1 1 0;
+	display: flex;
+	min-height: 0;
+	overflow: hidden;
+}
+
+#circuit-left-col {
+	flex: 1 1 0;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	overflow: hidden;
+}
+
+#phase-legend-inline {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+}
+
+.phase-pip {
+	font-size: 10px;
+	font-family: monospace;
+	color: #0d1117;
+	font-weight: 600;
+	padding: 3px 5px;
+	border-radius: 3px;
+	text-align: center;
+}
+
+/* Center: circuit diagram */
+#circuit-diagram {
+	flex: 1 1 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: auto;
+	padding: 32px;
+	min-width: 0;
+}
+
+#circuit-scroll {
+	overflow: auto;
+}
+#circuit-svg {
+	display: block;
+}
+
+/* Right: input panel (full height) */
+#circuit-sidebar {
+	width: 240px;
+	flex-shrink: 0;
+	border-left: 1px solid #30363d;
+	background: #161b22;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+#sidebar-presets {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 5px;
+	padding: 12px 12px 8px;
+	flex-shrink: 0;
+	border-bottom: 1px solid #30363d;
+}
+
+#sidebar-presets button {
+	padding: 6px 4px;
+	background: #21262d;
+	color: #e6edf3;
+	border: 1px solid #30363d;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 12px;
+	font-family: monospace;
+	transition: background 0.1s;
+}
+#sidebar-presets button:hover {
+	background: #30363d;
+}
+#sidebar-presets button.active {
+	background: #1f3a5f;
+	border-color: #388bfd;
+	color: #79c0ff;
+}
+
+#sidebar-input {
+	flex: 1 1 0;
+	display: flex;
+	flex-direction: column;
+	padding: 10px 12px 12px;
+	min-height: 0;
+}
+
+#circuit-input {
+	flex: 1 1 0;
+	width: 100%;
+	background: #0d1117;
+	color: #e6edf3;
+	border: 1px solid #30363d;
+	border-radius: 5px;
+	padding: 8px 10px;
+	font-family: monospace;
+	font-size: 13px;
+	line-height: 1.5;
+	resize: none;
+	min-height: 0;
+}
+#circuit-input:focus {
+	outline: none;
+	border-color: #388bfd;
+}
+
+.parse-error {
+	margin-top: 6px;
+	font-size: 11px;
+	color: #f85149;
+	font-family: monospace;
+}
+
+/* Bottom: control bar + histogram */
+#circuit-results {
+	border-top: 1px solid #30363d;
+	padding: 8px 20px 10px;
+	flex-shrink: 0;
+	background: #0d1117;
+}
+
+#results-header {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin-bottom: 8px;
+}
+
+.results-divider {
+	width: 1px;
+	height: 16px;
+	background: #30363d;
+	margin: 0 4px;
+	flex-shrink: 0;
+}
+
+#reset-btn {
+	padding: 4px 10px;
+	background: #21262d;
+	color: #8b949e;
+	border: 1px solid #30363d;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 12px;
+	font-family: monospace;
+	transition: background 0.1s;
+}
+#reset-btn:hover {
+	background: #30363d;
+	color: #e6edf3;
+}
+
+#run-btn {
+	padding: 4px 10px;
+	background: #1f3a5f;
+	color: #79c0ff;
+	border: 1px solid #388bfd;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 12px;
+	font-family: monospace;
+	transition: background 0.1s;
+}
+#run-btn:hover {
+	background: #2a5080;
+}
+
+#step-btn {
+	padding: 4px 10px;
+	background: #21262d;
+	color: #e6edf3;
+	border: 1px solid #30363d;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 12px;
+	font-family: monospace;
+	transition: background 0.1s;
+}
+#step-btn:hover {
+	background: #30363d;
+}
+
+.step-label {
+	flex: 1;
+	font-size: 12px;
+	font-family: monospace;
+	color: #bb86fc;
+	text-align: center;
+}
+
+#step-nav {
+	display: flex;
+	gap: 5px;
+}
+
+#step-nav button {
+	padding: 4px 12px;
+	background: #21262d;
+	color: #e6edf3;
+	border: 1px solid #30363d;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 12px;
+	font-family: monospace;
+	transition: background 0.1s;
+}
+#step-nav button:hover:not(:disabled) {
+	background: #30363d;
+}
+#step-nav button:disabled {
+	opacity: 0.3;
+	cursor: not-allowed;
+}
+
+/* prev/next in control bar share same style as reset/run */
+#prev-btn,
+#next-btn {
+	padding: 4px 12px;
+	background: #21262d;
+	color: #e6edf3;
+	border: 1px solid #30363d;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 12px;
+	font-family: monospace;
+	transition: background 0.1s;
+}
+#prev-btn:hover:not(:disabled),
+#next-btn:hover:not(:disabled) {
+	background: #30363d;
+}
+#prev-btn:disabled,
+#next-btn:disabled {
+	opacity: 0.3;
+	cursor: not-allowed;
 }

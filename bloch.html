@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bloch Sphere Visualizer</title>
+    <style>html{background:#0d1117}</style>
+  </head>
+  <body>
+    <nav id="page-nav">
+      <a href="./index.html">Circuit</a>
+      <a href="./bloch.html" class="active">Bloch Sphere</a>
+    </nav>
+    <div id="app">
+    <div id="canvas-container">
+      <canvas id="canvas"></canvas>
+      <div id="label-layer"></div>
+    </div>
+    <aside id="controls-panel">
+
+      <section>
+        <h2>Backend</h2>
+        <div class="button-grid backend-grid">
+          <button type="button" data-backend="ibm" class="active">IBM</button>
+          <button type="button" data-backend="alice_bob">Alice &amp; Bob</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Snap to</h2>
+        <div class="button-grid">
+          <button type="button" data-testid="snap-0"       data-state="|0⟩" >|0⟩</button>
+          <button type="button" data-testid="snap-1"       data-state="|1⟩" >|1⟩</button>
+          <button type="button" data-testid="snap-plus"    data-state="|+⟩" >|+⟩</button>
+          <button type="button" data-testid="snap-minus"   data-state="|-⟩" >|-⟩</button>
+          <button type="button" data-testid="snap-i"       data-state="|i⟩" >|i⟩</button>
+          <button type="button" data-testid="snap-minus-i" data-state="|-i⟩">|-i⟩</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Single Qubit Transformations</h2>
+        <div class="button-grid">
+          <button type="button" data-testid="gate-X"   data-gate="X"  >X</button>
+          <button type="button" data-testid="gate-Y"   data-gate="Y"  >Y</button>
+          <button type="button" data-testid="gate-Z"   data-gate="Z"  >Z</button>
+          <button type="button" data-testid="gate-H"   data-gate="H"  >H</button>
+          <button type="button" data-testid="gate-S"   data-gate="S"  >S</button>
+          <button type="button" data-testid="gate-Sdg" data-gate="S†" >S†</button>
+          <button type="button" data-testid="gate-T"   data-gate="T"  >T</button>
+          <button type="button" data-testid="gate-Tdg" data-gate="T†" >T†</button>
+          <button type="button" data-testid="gate-SX"  data-gate="SX" >SX</button>
+          <button type="button" data-testid="gate-SXdg" data-gate="SX†">SX†</button>
+          <button type="button" data-testid="gate-I"   data-gate="I"  >I</button>
+        </div>
+      </section>
+
+      <div id="hw-display">
+        <div class="label">Hardware</div>
+        <div id="hw-legend">
+          <span class="hw-step physical">physical</span>
+          <span class="hw-step virtual">virtual</span>
+        </div>
+        <div id="hw-steps"></div>
+        <div id="hw-caveat"></div>
+      </div>
+
+      <div id="bloch-display">
+        <div class="label">Bloch vector</div>
+        <div data-testid="bloch-output">0.000,0.000,1.000</div>
+      </div>
+
+    </aside>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

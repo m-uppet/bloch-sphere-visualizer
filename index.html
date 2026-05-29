@@ -3,68 +3,71 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bloch Sphere Visualizer</title>
+    <title>Circuit Debugger</title>
+    <style>html{background:#0d1117}</style>
   </head>
   <body>
-    <div id="canvas-container">
-      <canvas id="canvas"></canvas>
-      <div id="label-layer"></div>
+    <nav id="page-nav">
+      <a href="./index.html" class="active">Circuit</a>
+      <a href="./bloch.html">Bloch Sphere</a>
+    </nav>
+
+    <div id="circuit-app">
+      <div id="circuit-main-row">
+
+        <!-- Left column: diagram + histogram -->
+        <div id="circuit-left-col">
+
+          <!-- Circuit diagram -->
+          <div id="circuit-diagram">
+            <div id="circuit-scroll">
+              <!-- biome-ignore lint/a11y/noSvgWithoutTitle: title injected by renderer.ts -->
+              <svg id="circuit-svg"></svg>
+            </div>
+          </div>
+
+          <!-- Results: controls + histogram + phase legend -->
+          <div id="circuit-results" style="visibility:hidden">
+            <div id="results-header">
+              <button type="button" id="reset-btn">Reset</button>
+              <button type="button" id="run-btn">Run <kbd>⌘↵</kbd></button>
+              <button type="button" id="prev-btn" disabled>◀</button>
+              <button type="button" id="next-btn">▶</button>
+              <div class="results-divider"></div>
+              <span id="step-label" class="step-label">Initial state</span>
+              <div class="results-divider"></div>
+              <div id="phase-legend-inline">
+                <span class="phase-pip" style="background:hsl(180,80%,50%)">0</span>
+                <span class="phase-pip" style="background:hsl(270,80%,50%)">π/2</span>
+                <span class="phase-pip" style="background:hsl(0,80%,50%)">π</span>
+                <span class="phase-pip" style="background:hsl(90,80%,50%)">−π/2</span>
+              </div>
+            </div>
+            <!-- biome-ignore lint/a11y/noSvgWithoutTitle: title injected by histogram.ts -->
+            <svg id="histogram-svg" style="display:block;width:100%"></svg>
+          </div>
+
+        </div>
+
+        <!-- Right: input panel (full height) -->
+        <aside id="circuit-sidebar">
+          <div id="sidebar-presets">
+            <button type="button" data-circuit="bell_phi_plus"  class="active">Φ⁺</button>
+            <button type="button" data-circuit="bell_phi_minus" >Φ⁻</button>
+            <button type="button" data-circuit="bell_psi_plus"  >Ψ⁺</button>
+            <button type="button" data-circuit="bell_psi_minus" >Ψ⁻</button>
+            <button type="button" data-circuit="ghz"            >GHZ</button>
+            <button type="button" data-circuit="grover"         >Grover</button>
+          </div>
+          <div id="sidebar-input">
+            <textarea id="circuit-input" spellcheck="false"
+              placeholder="H 0&#10;CX 0 1"></textarea>
+            <div id="parse-error" class="parse-error"></div>
+          </div>
+        </aside>
+
+      </div>
     </div>
-    <aside id="controls-panel">
-
-      <section>
-        <h2>Backend</h2>
-        <div class="button-grid backend-grid">
-          <button type="button" data-backend="ibm" class="active">IBM</button>
-          <button type="button" data-backend="alice_bob">Alice &amp; Bob</button>
-        </div>
-      </section>
-
-      <section>
-        <h2>Snap to</h2>
-        <div class="button-grid">
-          <button type="button" data-testid="snap-0"       data-state="|0⟩" >|0⟩</button>
-          <button type="button" data-testid="snap-1"       data-state="|1⟩" >|1⟩</button>
-          <button type="button" data-testid="snap-plus"    data-state="|+⟩" >|+⟩</button>
-          <button type="button" data-testid="snap-minus"   data-state="|-⟩" >|-⟩</button>
-          <button type="button" data-testid="snap-i"       data-state="|i⟩" >|i⟩</button>
-          <button type="button" data-testid="snap-minus-i" data-state="|-i⟩">|-i⟩</button>
-        </div>
-      </section>
-
-      <section>
-        <h2>Single Qubit Transformations</h2>
-        <div class="button-grid">
-          <button type="button" data-testid="gate-X"   data-gate="X"  >X</button>
-          <button type="button" data-testid="gate-Y"   data-gate="Y"  >Y</button>
-          <button type="button" data-testid="gate-Z"   data-gate="Z"  >Z</button>
-          <button type="button" data-testid="gate-H"   data-gate="H"  >H</button>
-          <button type="button" data-testid="gate-S"   data-gate="S"  >S</button>
-          <button type="button" data-testid="gate-Sdg" data-gate="S†" >S†</button>
-          <button type="button" data-testid="gate-T"   data-gate="T"  >T</button>
-          <button type="button" data-testid="gate-Tdg" data-gate="T†" >T†</button>
-          <button type="button" data-testid="gate-SX"  data-gate="SX" >SX</button>
-          <button type="button" data-testid="gate-SXdg" data-gate="SX†">SX†</button>
-          <button type="button" data-testid="gate-I"   data-gate="I"  >I</button>
-        </div>
-      </section>
-
-      <div id="hw-display">
-        <div class="label">Hardware</div>
-        <div id="hw-legend">
-          <span class="hw-step physical">physical</span>
-          <span class="hw-step virtual">virtual</span>
-        </div>
-        <div id="hw-steps"></div>
-        <div id="hw-caveat"></div>
-      </div>
-
-      <div id="bloch-display">
-        <div class="label">Bloch vector</div>
-        <div data-testid="bloch-output">0.000,0.000,1.000</div>
-      </div>
-
-    </aside>
-    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/circuit/main.ts"></script>
   </body>
 </html>

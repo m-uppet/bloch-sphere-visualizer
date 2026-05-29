@@ -5,21 +5,21 @@ import type {
 	GateDecomposition,
 } from "./math/decompositions.js";
 import { applyGate, GATES, type GateName } from "./math/gates.js";
+import type { BlochVector } from "./math/statevector.js";
 import {
 	blochFromState,
 	CARDINAL_STATES,
 	type StateVector,
 } from "./math/statevector.js";
-import { Animator } from "./renderer/animator.js";
 import { BlochScene } from "./renderer/scene.js";
 
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 const labelLayer = document.getElementById("label-layer") as HTMLElement;
-const blochOutput = document.querySelector<HTMLElement>(
+const blochEl = document.querySelector<HTMLElement>(
 	'[data-testid="bloch-output"]',
 );
-if (!blochOutput)
-	throw new Error('Missing [data-testid="bloch-output"] element');
+if (!blochEl) throw new Error('Missing [data-testid="bloch-output"] element');
+const blochOutput: HTMLElement = blochEl;
 
 const zero = CARDINAL_STATES["|0⟩"];
 if (!zero) throw new Error("Missing cardinal state |0⟩");
@@ -27,12 +27,16 @@ let currentState: StateVector = zero;
 let selectedBackend: BackendId = "ibm";
 let decompositions: DecompositionFile | null = null;
 
+function setBlochOutput(v: BlochVector): void {
+	const f = (n: number) => (Math.abs(n) < 5e-4 ? 0 : n).toFixed(3);
+	blochOutput.textContent = `${f(v.x)},${f(v.y)},${f(v.z)}`;
+}
+
 const scene = new BlochScene(canvas, labelLayer);
-const animator = new Animator(blochOutput);
 
 function setVector(state: StateVector): void {
 	const v = blochFromState(state);
-	animator.set(v);
+	setBlochOutput(v);
 	scene.updateVector(v.x, v.y, v.z);
 }
 
