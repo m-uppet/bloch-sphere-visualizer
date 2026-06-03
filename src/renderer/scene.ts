@@ -16,6 +16,7 @@ export class BlochScene {
 	private labelRenderer: CSS2DRenderer;
 	private controls: OrbitControls;
 	private stateArrow: THREE.ArrowHelper;
+	private extraArrows = new Map<string, THREE.ArrowHelper>();
 	private rafId?: number;
 
 	constructor(canvas: HTMLCanvasElement, labelContainer: HTMLElement) {
@@ -147,6 +148,42 @@ export class BlochScene {
 		this.camera.updateProjectionMatrix();
 		this.renderer.setSize(w, h, false);
 		this.labelRenderer.setSize(w, h);
+	}
+
+	addArrow(id: string, color: number): void {
+		if (this.extraArrows.has(id)) return;
+		const arrow = new THREE.ArrowHelper(
+			new THREE.Vector3(0, 0, 1),
+			new THREE.Vector3(0, 0, 0),
+			1,
+			color,
+			0.15,
+			0.08,
+		);
+		arrow.visible = false;
+		this.scene.add(arrow);
+		this.extraArrows.set(id, arrow);
+	}
+
+	updateArrow(id: string, x: number, y: number, z: number): void {
+		const arrow = this.extraArrows.get(id);
+		if (!arrow) return;
+		const len = Math.sqrt(x * x + y * y + z * z);
+		if (len < 1e-6) {
+			arrow.visible = false;
+			return;
+		}
+		arrow.visible = true;
+		arrow.setDirection(new THREE.Vector3(x / len, y / len, z / len));
+		arrow.setLength(len, 0.15, 0.08);
+	}
+
+	removeArrow(id: string): void {
+		const arrow = this.extraArrows.get(id);
+		if (arrow) {
+			this.scene.remove(arrow);
+			this.extraArrows.delete(id);
+		}
 	}
 
 	updateVector(x: number, y: number, z: number): void {

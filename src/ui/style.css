@@ -509,3 +509,138 @@ section h2 {
 	opacity: 0.3;
 	cursor: not-allowed;
 }
+
+/* ── Custom states section ── */
+.cs-hint {
+	font-size: 10px;
+	color: #484f58;
+	font-family: monospace;
+	margin-bottom: 10px;
+	margin-top: -6px;
+	line-height: 1.5;
+}
+
+.cs-hint code {
+	background: #21262d;
+	padding: 0 3px;
+	border-radius: 3px;
+}
+
+#custom-states-list {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-bottom: 8px;
+}
+
+.cs-row {
+	border: 1px solid #30363d;
+	border-radius: 6px;
+	padding: 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.cs-row-header {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.cs-dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	flex-shrink: 0;
+}
+
+.cs-name {
+	flex: 1;
+	font-size: 11px;
+	color: #8b949e;
+	font-family: monospace;
+}
+
+.cs-remove {
+	background: transparent;
+	border: none;
+	color: #484f58;
+	cursor: pointer;
+	font-size: 11px;
+	padding: 0 2px;
+	line-height: 1;
+	transition: color 0.12s;
+}
+
+.cs-remove:hover {
+	color: #f85149;
+}
+
+.cs-inputs {
+	display: grid;
+	grid-template-columns: 14px 1fr;
+	align-items: center;
+	gap: 4px 6px;
+}
+
+.cs-amp-label {
+	font-size: 11px;
+	font-family: monospace;
+	color: #7d8590;
+	text-align: right;
+}
+
+.cs-amp-input {
+	width: 100%;
+	background: #0d1117;
+	color: #e6edf3;
+	border: 1px solid #30363d;
+	border-radius: 4px;
+	padding: 3px 6px;
+	font-size: 11px;
+	font-family: monospace;
+	transition: border-color 0.12s;
+}
+
+.cs-amp-input:focus {
+	outline: none;
+	border-color: #388bfd;
+}
+
+.cs-amp-input.error {
+	border-color: #f85149;
+}
+
+.cs-bloch {
+	font-family: monospace;
+	font-size: 10px;
+	color: #484f58;
+	padding-left: 2px;
+	min-height: 14px;
+}
+
+#add-state-btn {
+	width: 100%;
+	padding: 6px;
+	background: transparent;
+	color: #484f58;
+	border: 1px dashed #30363d;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 12px;
+	font-family: monospace;
+	transition:
+		color 0.12s,
+		border-color 0.12s;
+}
+
+#add-state-btn:hover:not(:disabled) {
+	color: #e6edf3;
+	border-color: #6e7681;
+}
+
+#add-state-btn:disabled {
+	opacity: 0.3;
+	cursor: not-allowed;
+}

@@ -12,6 +12,7 @@ import {
 	type StateVector,
 } from "./math/statevector.js";
 import { BlochScene } from "./renderer/scene.js";
+import { initCustomStates } from "./ui/custom-states.js";
 
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 const labelLayer = document.getElementById("label-layer") as HTMLElement;
@@ -130,3 +131,4 @@ document.querySelectorAll<HTMLButtonElement>("[data-gate]").forEach((btn) => {
 });
 
 scene.startLoop((): void => {});
+initCustomStates(scene);
